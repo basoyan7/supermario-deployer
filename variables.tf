@@ -47,7 +47,7 @@ variable "author" {
 }
 
 variable "ansible_dockerfile_path" {
-  default     = "./ansible_dockerfile"
+  default     = "./ansible-dockerfile"
   description = "Ansible dockerfile path."
 }
 
