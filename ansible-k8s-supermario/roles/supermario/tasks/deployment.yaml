@@ -1,0 +1,4 @@
+- name: Apply Supermario Deployment
+  k8s:
+    state: present
+    definition: "{{ lookup('template', 'deployment.j2.yaml') | from_yaml }}"

@@ -1,5 +1,21 @@
 variable "region" {
   default = "us-east-1"
+  description = "AWS Region."
+}
+
+
+variable "aws_access_key_id" {
+  type = string
+  sensitive = true
+  default = ""
+  description = "AWS Access Key ID."
+}
+
+variable "aws_secret_access_key" {
+  type = string
+  sensitive = true
+  default = ""
+  description = "AWS Secret Access Key."
 }
 
 variable "map_roles" {
@@ -47,7 +63,7 @@ variable "author" {
 }
 
 variable "ansible_dockerfile_path" {
-  default     = "./ansible-dockerfile"
+  default     = "./ansible-k8s-supermario"
   description = "Ansible dockerfile path."
 }
 

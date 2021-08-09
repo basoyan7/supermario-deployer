@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ supermario_service.name }}
+  namespace: {{ supermario_namespace }}
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: {{ supermario_http }}
+  selector:
+    app: {{ supermario_label }}
+  type: 

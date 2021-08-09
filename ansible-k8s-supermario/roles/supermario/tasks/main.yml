@@ -1,0 +1,11 @@
+- name: "Supermario Namespace"
+  include_tasks: namespace.yaml
+
+- name: "Supermario Deployment"
+  include_tasks: deployment.yaml
+
+- name: "Supermario Service"
+  include_tasks: service.yaml
+
+- name: "Supermario Ingress"
+  include_tasks: ingress.yaml

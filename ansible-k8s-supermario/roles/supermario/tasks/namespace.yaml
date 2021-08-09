@@ -1,0 +1,4 @@
+- name: Apply Supermario Namespace
+  k8s:
+    state: present
+    definition: "{{ lookup('template', 'namespace.j2.yaml') | from_yaml }}"

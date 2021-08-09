@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ supermario_deployment.name }}
+  namespace: {{ supermario_namespace }}
+  labels:
+    app: {{ supermario_label }}
+spec:
+  replicas: {{ supermario_deployment.replicas }}
+  revisionHistoryLimit: {{ supermario_deployment.revisionHistoryLimit }}
+  selector:
+    matchLabels:
+      app: {{ supermario_label }}
+  strategy:
+    rollingUpdate:
+      maxSurge: {{ supermario_deployment.rollingUpdate.maxSurge }}
+      maxUnavailable: {{ supermario_deployment.rollingUpdate.maxUnavailable }}
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: {{ supermario_label }}
+    spec: 
+      containers:
+      - name: {{ supermario_deployment.container.name }}
+        image: {{ supermario_deployment.container.image }}
+        imagePullPolicy: {{ supermario_deployment.container.imagePullPolicy }}
+        readinessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 2
+          successThreshold: 1
+        ports:
+        - name: supermario
+          containerPort: 8080
+          protocol: TCP
+        resources:
+          limits:
+            cpu: {{ supermario_deployment.container.resources.limits.cpu }}
+            memory: {{ supermario_deployment.container.resources.limits.memory }}
+          requests:
+            cpu: {{ supermario_deployment.container.resources.requests.cpu }}
+            memory: {{ supermario_deployment.container.resources.requests.memory }}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File

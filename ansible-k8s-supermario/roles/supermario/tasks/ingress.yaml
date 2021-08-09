@@ -1,0 +1,4 @@
+- name: Apply Supermario Ingresss
+  k8s:
+    state: present
+    definition: "{{ lookup('template', 'ingress.j2.yaml') | from_yaml }}"

@@ -35,12 +35,13 @@ resource "docker_container" "ansible_container" {
   name    = var.ansible_container
   image   = docker_image.ansible_image.latest
   entrypoint = ["/bin/bash","-c","tail -f /dev/null"]
+  env = ["AWS_ACCESS_KEY_ID=${var.aws_access_key_id}", "AWS_SECRET_ACCESS_KEY=${var.aws_secret_access_key}", "AWS_DEFAULT_REGION=${var.region}"]
 }
 
 resource "docker-utils_exec" "ansible_container_exec" {
   container_name = var.ansible_container    
-  commands = ["/bin/bash","-c","mkdir $FILENAME"] 
-  environment = ["FILENAME=example"] 
+  commands = ["/bin/bash","-c","aws eks update-kubeconfig --name supermario-eks","ansible-playbook supermario_deploy_playbook.yaml"]
+  depends_on = [docker_container.ansible_container]
 }
 
 
@@ -113,4 +114,14 @@ module "eks" {
 
   map_roles = var.map_roles
   map_users = var.map_users
+}
+
+module "alb-ingress-controller" {
+  source  = "iplabs/alb-ingress-controller/kubernetes"
+  version = "3.4.0"
+  k8s_cluster_type = "eks"
+  k8s_namespace    = "supermario"
+  k8s_cluster_name = data.aws_eks_cluster.cluster.name
+  aws_region_name  = var.region
+  depends_on = [docker-utils_exec.ansible_container_exec]
 }

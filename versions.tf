@@ -11,7 +11,7 @@ terraform {
       version = "~>2.14.0"
     }
     docker-utils = {
-      source = "Kaginari/docker-utils"
+      source  = "Kaginari/docker-utils"
       version = "0.0.4"
     }
   }

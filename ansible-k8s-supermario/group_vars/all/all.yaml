@@ -1,0 +1,56 @@
+### Option: namespace
+# Namespace to create and deploy resources in
+supermario_namespace: "supermario"
+
+### Option: supermario_image_name
+# Image name for sueprmario container 
+# Usually we do not need to modify this value.
+supermario_image_name: "bharathshetty4/supermario"
+
+### Option: supermario_label
+# Supermario label to implement in all corresponding components resources.
+# Usually we do not need to modify this value.
+supermario_label: "supermario"
+
+### Option: supermario_http
+# Name for service mapping.
+# Usually we do not need to modify this value.
+supermario_http: "supermario-http"
+
+### Option: ingress
+# All parameters and values to implement in the Supermario Ingress Resource template
+# such as the Ingress resource name, host, paths, etc.
+# Usually we do not need to modify this value.
+supermario_ingress:
+  name: "supermario-ingress"
+  host: "{{ supermario_namespace }}.example.com"
+  path: "/"
+  pathType: "Prefix"
+
+### Option: supermario_service
+# The supermario_service resource parameters such as name and type.
+# Usually we do not need to modify this value.
+supermario_service: 
+  name: "supermario-service"
+  type: "ClusterIP"
+
+### Option: supermario_deployment 
+# Parameters and values used in the K8s deployment for supermario
+supermario_deployment:
+  name: "supermario"
+  replicas: "2"
+  revisionHistoryLimit: "10"
+  rollingUpdate:
+    maxSurge: "25%" 
+    maxUnavailable: "25%"
+  container: 
+    name: "supermario"
+    image: "{{ supermario_image_name }}:latest"
+    imagePullPolicy: "Always"
+    resources:
+      requests:
+        cpu: "128m"
+        memory: "256Mi"
+      limits: 
+        cpu: "1000m"
+        memory: "1024Mi"
