@@ -6,6 +6,7 @@ terraform {
     local      = ">= 1.4"
     random     = ">= 2.1"
     kubernetes = "~> 1.11"
+    helm = ">= 1.0"
     docker = {
       source  = "kreuzwerker/docker"
       version = "~>2.14.0"

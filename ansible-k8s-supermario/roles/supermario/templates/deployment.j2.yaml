@@ -31,7 +31,7 @@ spec:
           initialDelaySeconds: 2
           successThreshold: 1
         ports:
-        - name: supermario
+        - name: {{ supermario_http }}
           containerPort: 8080
           protocol: TCP
         resources:
