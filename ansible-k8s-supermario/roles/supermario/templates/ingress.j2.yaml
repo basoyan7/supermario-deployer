@@ -5,8 +5,8 @@ metadata:
   namespace: {{ supermario_namespace }}
 spec:
   rules:
-  - host: {{ supermario_ingress.host }}
-    http:
+#  - host: {{ supermario_ingress.host }}
+  - http:
       paths:
       - pathType: {{ supermario_ingress.pathType }}
         path: {{ supermario_ingress.path }}

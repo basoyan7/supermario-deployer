@@ -71,3 +71,4 @@ variable "ansible_container" {
   default     = "ansible"
   description = "Ansible container name."
 }
+

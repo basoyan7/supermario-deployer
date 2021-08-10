@@ -28,7 +28,3 @@ output "node_groups" {
   value       = module.eks.node_groups
 }
 
-# output "elb_ip_adress" {
-#   description = "Outputs of elb IP address"
-#   value       = module.eks-ingress-nginx.node_groups
-# }
